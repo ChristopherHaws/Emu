@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <Authors>Christopher.Haws</Authors>
+    <Company>Spiral Games</Company>
+    <Product>Emu</Product>
+    <Description>The CPU in Wii U is believed to be an evolution of the Broadway architecture. The largely unconfirmed characteristics are a triple core CPU which runs at 1.24 GHz and is manufactured on a 45 nm process.</Description>
+    <Copyright>Spiral Games</Copyright>
+    <RepositoryUrl>https://github.com/ChristopherHaws/Emu.git</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>emu emulator processor powerpc espresso wii wiiu</PackageTags>
+    <PackageProjectUrl>https://github.com/ChristopherHaws/Emu</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ChristopherHaws/Emu/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Emu.Processors.Abstractions\Emu.Processors.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

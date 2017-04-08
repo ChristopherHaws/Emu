@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <Authors>Christopher.Haws</Authors>
+    <Company>Spiral Games</Company>
+    <Product>Emu</Product>
+    <Copyright>Spiral Games</Copyright>
+    <PackageLicenseUrl>https://github.com/ChristopherHaws/Emu/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/ChristopherHaws/Emu</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ChristopherHaws/Emu.git</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>emu emulator processor abstractions</PackageTags>
+    <Description>Proceessor abstractions for emulating different processors.</Description>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <RootNamespace>Emu.Processors</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors />
+  </PropertyGroup>
+
+</Project>
