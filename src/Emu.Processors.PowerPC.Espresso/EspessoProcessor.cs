@@ -4,17 +4,27 @@ using System.Collections.Generic;
 namespace Emu.Processors.PowerPC.Espresso
 {
 	/// <summary>
-	/// Represents a variant of the PowerPC 750CL which is present in the Wii U.
+	/// Represents a variant of the PowerPC 750CL (Broadway) which is present in the Wii U.
 	/// </summary>
 	/// <remarks>
 	/// https://fail0verflow.com/media/files/ppc_750cl.pdf
 	/// https://www.ecse.rpi.edu/courses/CStudio/ppc603e/MPCFPE.pdf
 	/// https://stuff.mit.edu/afs/sipb/contrib/doc/specs/ic/cpu/powerpc/MPCFPE32B.pdf
+	/// https://www.gamefaqs.com/boards/631516-wii-u/68074239
+	/// 
+	/// Micro-Architecture: PowerPC 7xx
+	/// Variant: PowerPC 750CL (Wii Broadway)
+	/// 
+	/// L2 Cache:
+	///		Core 0 = 512KB
+	///		Core 1 = 2MB
+	///		Core 2 = 512KB
+	///		Total DRAM = 3MB
 	/// </remarks>
 	/// <seealso cref="IProcessor" />
 	public class EspessoProcessor : IProcessor
 	{
-		public Double ClockSpeedInMegahertz { get; } = 1243;
+		public Double ClockSpeedInMegahertz { get; } = 1243.125;
 
 		public UInt32 Cores { get; } = 3;
 
