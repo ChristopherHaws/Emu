@@ -188,10 +188,10 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// <remarks>
 		/// Name: FPRF
 		/// </remarks>
-		public UInt32 FloatingPointResultFlags
+		public FloatingPointResults FloatingPointResults
 		{
-			get => this.vector[FPRF];
-			set => this.vector[FPRF] = value;
+			get => (FloatingPointResults)this.vector[FPRF];
+			set => this.vector[FPRF] = (UInt32)value;
 		}
 
 		/// <summary>

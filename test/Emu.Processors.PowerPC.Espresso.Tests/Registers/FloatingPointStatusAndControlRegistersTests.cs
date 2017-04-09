@@ -5,8 +5,8 @@ using Xunit;
 
 namespace Emu.Processors.PowerPC.Espresso.Tests
 {
-    public class UnitTest1
-    {
+    public class FloatingPointStatusAndControlRegistersTests
+	{
         [Theory]
 		[InlineData("FX", (UInt32)0b0000_0000_0000_0000_0000_0000_0000_0001, (UInt32)0b1)]
 		[InlineData("FEX", (UInt32)0b0000_0000_0000_0000_0000_0000_0000_0010, (UInt32)0b1)]
@@ -35,9 +35,9 @@ namespace Emu.Processors.PowerPC.Espresso.Tests
 		[InlineData("XE", (UInt32)0b0001_0000_0000_0000_0000_0000_0000_0000, (UInt32)0b1)]
 		[InlineData("NI", (UInt32)0b0010_0000_0000_0000_0000_0000_0000_0000, (UInt32)0b1)]
 		[InlineData("RN", (UInt32)0b1100_0000_0000_0000_0000_0000_0000_0000, (UInt32)0b11)]
-		public void Test1(String register, UInt32 data, UInt32 expected)
+		public void CorrectRegistersGetPopulated(String register, UInt32 data, UInt32 expected)
         {
-			// arrange
+			// Arrange
 			var registers = new FloatingPointStatusAndControlRegisters(data);
 
 			var lookup = new Dictionary<String, Func<UInt32>>
@@ -45,7 +45,7 @@ namespace Emu.Processors.PowerPC.Espresso.Tests
 				["RN"] = () => registers.RoundingMode,
 				["NI"] = () => registers.FlushToZeroEnable,
 				["XE"] = () => registers.InexactExceptionEnable,
-				["FPRF"] = () => registers.FloatingPointResultFlags,
+				["FPRF"] = () => (UInt32)registers.FloatingPointResults,
 				["ReservedBit"] = () => registers.Reserved,
 				["VXSOFT"] = () => registers.InvalidOperationExceptionForSoftwareRequest,
 				["VXSQRT"] = () => registers.InvalidOperationExceptionForInvalidSquareRoot,
@@ -74,6 +74,28 @@ namespace Emu.Processors.PowerPC.Espresso.Tests
 
 			// Act
 			var actual = lookup[register]();
+
+			// Assert
+			Assert.Equal(expected, actual);
+		}
+
+		[Theory]
+		[InlineData(0b0000_0000_0000_1000_1000_0000_0000_0000, FloatingPointResults.QuietNotANumber)]
+		[InlineData(0b0000_0000_0000_0100_1000_0000_0000_0000, FloatingPointResults.NegativeInfinity)]
+		[InlineData(0b0000_0000_0000_0100_0000_0000_0000_0000, FloatingPointResults.NegativeNormalizedNumber)]
+		[InlineData(0b0000_0000_0000_1100_0000_0000_0000_0000, FloatingPointResults.NegativeDenormalizedNumber)]
+		[InlineData(0b0000_0000_0000_1001_0000_0000_0000_0000, FloatingPointResults.NegativeZero)]
+		[InlineData(0b0000_0000_0000_0001_0000_0000_0000_0000, FloatingPointResults.PositiveZero)]
+		[InlineData(0b0000_0000_0000_1010_0000_0000_0000_0000, FloatingPointResults.PositiveDenormalizedNumber)]
+		[InlineData(0b0000_0000_0000_0010_0000_0000_0000_0000, FloatingPointResults.PositiveNormalizedNumber)]
+		[InlineData(0b0000_0000_0000_0010_1000_0000_0000_0000, FloatingPointResults.PositiveInfinity)]
+		public void FloatingPointResults_ArePopulated(UInt32 data, FloatingPointResults expected)
+		{
+			// Arrange
+			var registers = new FloatingPointStatusAndControlRegisters(data);
+
+			// Act
+			var actual = registers.FloatingPointResults;
 
 			// Assert
 			Assert.Equal(expected, actual);
