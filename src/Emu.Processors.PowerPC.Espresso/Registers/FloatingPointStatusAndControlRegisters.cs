@@ -2,51 +2,45 @@
 using Emu.Types;
 
 namespace Emu.Processors.PowerPC.Espresso.Registers
-{	
+{
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <remarks>
+	/// Section 2.1.4 (Page 63) of "PowerPC Microprocessor Family - The Programming Environtments 32-bit.pdf"
+	/// </remarks>
 	public struct FloatingPointStatusAndControlRegisters
 	{
-		// Modes
-		private static UInt32BitVector.Section RoundingModeSection = UInt32BitVector.CreateSection(2);
-		private static UInt32BitVector.Section FlushToZeroEnableSection = UInt32BitVector.CreateSection(1, RoundingModeSection);
+		// We will use this to read the bits in reverse.
+		private const UInt16 RegisterSize = 0;
 
-		// IEEE Exceptions
-		private static UInt32BitVector.Section InexactExceptionEnableSection = UInt32BitVector.CreateSection(1, FlushToZeroEnableSection);
-		private static UInt32BitVector.Section DivisionByZeroEnableSection = UInt32BitVector.CreateSection(1, InexactExceptionEnableSection);
-		private static UInt32BitVector.Section UnderflowExceptionEnableSection = UInt32BitVector.CreateSection(1, DivisionByZeroEnableSection);
-		private static UInt32BitVector.Section OverflowExceptionEnableSection = UInt32BitVector.CreateSection(1, UnderflowExceptionEnableSection);
-
-		// Invalid Operation Exceptions
-		private static UInt32BitVector.Section InvalidOperationExceptionEnableSection = UInt32BitVector.CreateSection(1, OverflowExceptionEnableSection);
-		private static UInt32BitVector.Section InvalidOperationExceptionForIntegerConversionEnableSection = UInt32BitVector.CreateSection(1, InvalidOperationExceptionEnableSection);
-		private static UInt32BitVector.Section InvalidOperationExceptionForSquareRootEnableSection = UInt32BitVector.CreateSection(1, InvalidOperationExceptionForIntegerConversionEnableSection);
-		private static UInt32BitVector.Section InvalidOperationExceptionForSoftwareRequestEnableSection = UInt32BitVector.CreateSection(1, InvalidOperationExceptionForSquareRootEnableSection);
-
-		// Reserved
-		private static UInt32BitVector.Section ReservedSection = UInt32BitVector.CreateSection(1, InvalidOperationExceptionForSoftwareRequestEnableSection);
-
-		// Floating Point
-		private static UInt32BitVector.Section FloatingPointResultFlagsSection = UInt32BitVector.CreateSection(5, ReservedSection);
-		private static UInt32BitVector.Section FractionInexactSection = UInt32BitVector.CreateSection(1, FloatingPointResultFlagsSection);
-		private static UInt32BitVector.Section FractionRoundedSection = UInt32BitVector.CreateSection(1, FractionInexactSection);
-
-		// Invalid Operation Exception
-		private static UInt32BitVector.Section InvalidOperationExceptionForInvalidComparisonSection = UInt32BitVector.CreateSection(1, FractionRoundedSection);
-		private static UInt32BitVector.Section InvalidOperationExceptionForInvalidInfMultZeroSection = UInt32BitVector.CreateSection(1, InvalidOperationExceptionForInvalidComparisonSection);
-		private static UInt32BitVector.Section InvalidOperationExceptionForInvalidDivideByZeroSection = UInt32BitVector.CreateSection(1, InvalidOperationExceptionForInvalidInfMultZeroSection);
-		private static UInt32BitVector.Section InvalidOperationExceptionForInvalidInfDivideByInfSection = UInt32BitVector.CreateSection(1, InvalidOperationExceptionForInvalidDivideByZeroSection);
-		private static UInt32BitVector.Section InvalidOperationExceptionForInvalidInfMinusInfSection = UInt32BitVector.CreateSection(1, InvalidOperationExceptionForInvalidInfDivideByInfSection);
-		private static UInt32BitVector.Section InvalidOperationExceptionForInvalidNotANumberSection = UInt32BitVector.CreateSection(1, InvalidOperationExceptionForInvalidInfMinusInfSection);
-
-		// Aritmatic
-		private static UInt32BitVector.Section InexactExceptionSection = UInt32BitVector.CreateSection(1, InvalidOperationExceptionForInvalidNotANumberSection);
-		private static UInt32BitVector.Section DivisionByZeroExceptionSection = UInt32BitVector.CreateSection(1, InexactExceptionSection);
-		private static UInt32BitVector.Section UnderflowExceptionSection = UInt32BitVector.CreateSection(1, DivisionByZeroExceptionSection);
-		private static UInt32BitVector.Section OverflowExceptionSection = UInt32BitVector.CreateSection(1, UnderflowExceptionSection);
-		private static UInt32BitVector.Section InvalidOperationExceptionSummarySection = UInt32BitVector.CreateSection(1, OverflowExceptionSection);
-
-		// Exception Summary
-		private static UInt32BitVector.Section ExceptionSummaryEnabledSection = UInt32BitVector.CreateSection(1, InvalidOperationExceptionSummarySection);
-		private static UInt32BitVector.Section ExceptionSummarySection = UInt32BitVector.CreateSection(1, ExceptionSummaryEnabledSection);
+		private static UInt32BitVector.Section FX = UInt32BitVector.CreateSection(1, 0);
+		private static UInt32BitVector.Section FEX = UInt32BitVector.CreateSection(1, 1);
+		private static UInt32BitVector.Section VX = UInt32BitVector.CreateSection(1, 2);
+		private static UInt32BitVector.Section OX = UInt32BitVector.CreateSection(1, 3);
+		private static UInt32BitVector.Section UX = UInt32BitVector.CreateSection(1, 4);
+		private static UInt32BitVector.Section ZX = UInt32BitVector.CreateSection(1, 5);
+		private static UInt32BitVector.Section XX = UInt32BitVector.CreateSection(1, 6);
+		private static UInt32BitVector.Section VXSNAN = UInt32BitVector.CreateSection(1, 7);
+		private static UInt32BitVector.Section VXISI = UInt32BitVector.CreateSection(1, 8);
+		private static UInt32BitVector.Section VXIDI = UInt32BitVector.CreateSection(1, 9);
+		private static UInt32BitVector.Section VXZDZ = UInt32BitVector.CreateSection(1, 10);
+		private static UInt32BitVector.Section VXIMZ = UInt32BitVector.CreateSection(1, 11);
+		private static UInt32BitVector.Section VXVC = UInt32BitVector.CreateSection(1, 12);
+		private static UInt32BitVector.Section FR = UInt32BitVector.CreateSection(1, 13);
+		private static UInt32BitVector.Section FI = UInt32BitVector.CreateSection(1, 14);
+		private static UInt32BitVector.Section FPRF = UInt32BitVector.CreateSection(5, 15);
+		private static UInt32BitVector.Section ReservedBit = UInt32BitVector.CreateSection(1, 20);
+		private static UInt32BitVector.Section VXSOFT = UInt32BitVector.CreateSection(1, 21);
+		private static UInt32BitVector.Section VXSQRT = UInt32BitVector.CreateSection(1, 22);
+		private static UInt32BitVector.Section VXCVI = UInt32BitVector.CreateSection(1, 23);
+		private static UInt32BitVector.Section VE = UInt32BitVector.CreateSection(1, 24);
+		private static UInt32BitVector.Section OE = UInt32BitVector.CreateSection(1, 25);
+		private static UInt32BitVector.Section UE = UInt32BitVector.CreateSection(1, 26);
+		private static UInt32BitVector.Section ZE = UInt32BitVector.CreateSection(1, 27);
+		private static UInt32BitVector.Section XE = UInt32BitVector.CreateSection(1, 28);
+		private static UInt32BitVector.Section NI = UInt32BitVector.CreateSection(1, 29);
+		private static UInt32BitVector.Section RN = UInt32BitVector.CreateSection(2, 30);
 
 
 		private UInt32BitVector vector;
@@ -64,8 +58,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 RoundingMode
 		{
-			get => this.vector[RoundingModeSection];
-			set => this.vector[RoundingModeSection] = value;
+			get => this.vector[RN];
+			set => this.vector[RN] = value;
 		}
 
 		/// <summary>
@@ -76,8 +70,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 FlushToZeroEnable
 		{
-			get => this.vector[FlushToZeroEnableSection];
-			set => this.vector[FlushToZeroEnableSection] = value;
+			get => this.vector[NI];
+			set => this.vector[NI] = value;
 		}
 
 		/// <summary>
@@ -88,10 +82,106 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 InexactExceptionEnable
 		{
-			get => this.vector[InexactExceptionEnableSection];
-			set => this.vector[InexactExceptionEnableSection] = value;
+			get => this.vector[XE];
+			set => this.vector[XE] = value;
 		}
 
+		/// <summary>
+		/// Gets or sets the reserved.
+		/// </summary>
+		/// <remarks>
+		/// Name: ReservedBit
+		/// </remarks>
+		public UInt32 Reserved
+		{
+			get => this.vector[ReservedBit];
+			set => this.vector[ReservedBit] = value;
+		}
+
+		/// <summary>
+		/// Gets or sets the invalid operation exception for software request.
+		/// </summary>
+		/// <remarks>
+		/// Name: VXSOFT
+		/// </remarks>
+		public UInt32 InvalidOperationExceptionForSoftwareRequest
+		{
+			get => this.vector[VXSOFT];
+			set => this.vector[VXSOFT] = value;
+		}
+
+		/// <summary>
+		/// Gets or sets the invalid operation exception for invalid square root.
+		/// </summary>
+		/// <remarks>
+		/// Name: VXSQRT
+		/// </remarks>
+		public UInt32 InvalidOperationExceptionForInvalidSquareRoot
+		{
+			get => this.vector[VXSQRT];
+			set => this.vector[VXSQRT] = value;
+		}
+
+		/// <summary>
+		/// Gets or sets the invalid operation exception for invalid integer convert.
+		/// </summary>
+		/// <remarks>
+		/// Name: VXCVI
+		/// </remarks>
+		public UInt32 InvalidOperationExceptionForInvalidIntegerConvert
+		{
+			get => this.vector[VXCVI];
+			set => this.vector[VXCVI] = value;
+		}
+
+		/// <summary>
+		/// Gets or sets the invalid operation exception enable.
+		/// </summary>
+		/// <remarks>
+		/// Name: VE
+		/// </remarks>
+		public UInt32 InvalidOperationExceptionEnable
+		{
+			get => this.vector[VE];
+			set => this.vector[VE] = value;
+		}
+
+		/// <summary>
+		/// Gets or sets the overflow exception enable.
+		/// </summary>
+		/// <remarks>
+		/// Name: OE
+		/// </remarks>
+		public UInt32 OverflowExceptionEnable
+		{
+			get => this.vector[OE];
+			set => this.vector[OE] = value;
+		}
+
+		/// <summary>
+		/// Gets or sets the underflow exception enable.
+		/// </summary>
+		/// <remarks>
+		/// Name: UE
+		/// </remarks>
+		public UInt32 UnderflowExceptionEnable
+		{
+			get => this.vector[UE];
+			set => this.vector[UE] = value;
+		}
+
+		/// <summary>
+		/// Gets or sets the divide by zero exception enable.
+		/// </summary>
+		/// <remarks>
+		/// Name: ZE
+		/// </remarks>
+		public UInt32 DivideByZeroExceptionEnable
+		{
+			get => this.vector[ZE];
+			set => this.vector[ZE] = value;
+		}
+		
 		/// <summary>
 		/// Floating point result flags (includes FPCC) (not sticky) from more to less significand: class, <, >, =, ?	
 		/// </summary>
@@ -100,8 +190,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 FloatingPointResultFlags
 		{
-			get => this.vector[FloatingPointResultFlagsSection];
-			set => this.vector[FloatingPointResultFlagsSection] = value;
+			get => this.vector[FPRF];
+			set => this.vector[FPRF] = value;
 		}
 
 		/// <summary>
@@ -112,8 +202,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 FractionInexact
 		{
-			get => this.vector[FractionInexactSection];
-			set => this.vector[FractionInexactSection] = value;
+			get => this.vector[FI];
+			set => this.vector[FI] = value;
 		}
 
 		/// <summary>
@@ -124,8 +214,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 FractionRounded
 		{
-			get => this.vector[FractionRoundedSection];
-			set => this.vector[FractionRoundedSection] = value;
+			get => this.vector[FR];
+			set => this.vector[FR] = value;
 		}
 
 		/// <summary>
@@ -136,8 +226,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 InvalidOperationExceptionForInvalidComparison
 		{
-			get => this.vector[InvalidOperationExceptionForInvalidComparisonSection];
-			set => this.vector[InvalidOperationExceptionForInvalidComparisonSection] = value;
+			get => this.vector[VXVC];
+			set => this.vector[VXVC] = value;
 		}
 
 		/// <summary>
@@ -148,8 +238,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 InvalidOperationExceptionForInvalidInfMultZero
 		{
-			get => this.vector[InvalidOperationExceptionForInvalidInfMultZeroSection];
-			set => this.vector[InvalidOperationExceptionForInvalidInfMultZeroSection] = value;
+			get => this.vector[VXIMZ];
+			set => this.vector[VXIMZ] = value;
 		}
 
 		/// <summary>
@@ -160,8 +250,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 InvalidOperationExceptionForInvalidDivideByZero
 		{
-			get => this.vector[InvalidOperationExceptionForInvalidDivideByZeroSection];
-			set => this.vector[InvalidOperationExceptionForInvalidDivideByZeroSection] = value;
+			get => this.vector[VXZDZ];
+			set => this.vector[VXZDZ] = value;
 		}
 
 		/// <summary>
@@ -172,8 +262,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 InvalidOperationExceptionForInvalidInfDivideByInf
 		{
-			get => this.vector[InvalidOperationExceptionForInvalidInfDivideByInfSection];
-			set => this.vector[InvalidOperationExceptionForInvalidInfDivideByInfSection] = value;
+			get => this.vector[VXIDI];
+			set => this.vector[VXIDI] = value;
 		}
 
 		/// <summary>
@@ -184,8 +274,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 InvalidOperationExceptionForInvalidInfMinusInf
 		{
-			get => this.vector[InvalidOperationExceptionForInvalidInfMinusInfSection];
-			set => this.vector[InvalidOperationExceptionForInvalidInfMinusInfSection] = value;
+			get => this.vector[VXISI];
+			set => this.vector[VXISI] = value;
 		}
 
 		/// <summary>
@@ -196,8 +286,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 InvalidOperationExceptionForInvalidNotANumber
 		{
-			get => this.vector[InvalidOperationExceptionForInvalidNotANumberSection];
-			set => this.vector[InvalidOperationExceptionForInvalidNotANumberSection] = value;
+			get => this.vector[VXSNAN];
+			set => this.vector[VXSNAN] = value;
 		}
 
 		/// <summary>
@@ -208,8 +298,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 InexactException
 		{
-			get => this.vector[InexactExceptionSection];
-			set => this.vector[InexactExceptionSection] = value;
+			get => this.vector[XX];
+			set => this.vector[XX] = value;
 		}
 
 		/// <summary>
@@ -220,8 +310,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 DivisionByZeroException
 		{
-			get => this.vector[DivisionByZeroExceptionSection];
-			set => this.vector[DivisionByZeroExceptionSection] = value;
+			get => this.vector[ZX];
+			set => this.vector[ZX] = value;
 		}
 
 		/// <summary>
@@ -232,8 +322,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 UnderflowException
 		{
-			get => this.vector[UnderflowExceptionSection];
-			set => this.vector[UnderflowExceptionSection] = value;
+			get => this.vector[UX];
+			set => this.vector[UX] = value;
 		}
 
 		/// <summary>
@@ -244,8 +334,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 OverflowException
 		{
-			get => this.vector[OverflowExceptionSection];
-			set => this.vector[OverflowExceptionSection] = value;
+			get => this.vector[OX];
+			set => this.vector[OX] = value;
 		}
 
 		/// <summary>
@@ -256,8 +346,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 InvalidOperationExceptionSummary
 		{
-			get => this.vector[InvalidOperationExceptionSummarySection];
-			set => this.vector[InvalidOperationExceptionSummarySection] = value;
+			get => this.vector[VX];
+			set => this.vector[VX] = value;
 		}
 
 		/// <summary>
@@ -268,8 +358,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 ExceptionSummaryEnabled
 		{
-			get => this.vector[ExceptionSummaryEnabledSection];
-			set => this.vector[ExceptionSummaryEnabledSection] = value;
+			get => this.vector[FEX];
+			set => this.vector[FEX] = value;
 		}
 
 		/// <summary>
@@ -280,8 +370,8 @@ namespace Emu.Processors.PowerPC.Espresso.Registers
 		/// </remarks>
 		public UInt32 ExceptionSummary
 		{
-			get => this.vector[ExceptionSummarySection];
-			set => this.vector[ExceptionSummarySection] = value;
+			get => this.vector[FX];
+			set => this.vector[FX] = value;
 		}
 	}
 }

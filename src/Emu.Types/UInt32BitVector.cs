@@ -36,19 +36,19 @@ namespace Emu.Types
 
 		public static Section CreateSection(Int16 size)
 		{
-			return new Section
-			{
-				Offset = 0,
-				Size = size,
-				Mask = (UInt32)((1L << size) - BitSize)
-			};
+			return CreateSection(size, 0);
 		}
 
 		public static Section CreateSection(Int16 size, Section previous)
 		{
+			return CreateSection(size, (Int16)(previous.Offset + previous.Size));
+		}
+
+		public static Section CreateSection(Int16 size, Int16 offset)
+		{
 			return new Section
 			{
-				Offset = (Int16)(previous.Offset + previous.Size),
+				Offset = offset,
 				Size = size,
 				Mask = (UInt32)((1L << size) - BitSize)
 			};
