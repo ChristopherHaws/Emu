@@ -33,6 +33,7 @@ namespace Emu.Processors.PowerPC.Espresso
 	/// - 7 stage pipeline - FP
 	/// - 6 execution units per core (18 EUs total)
 	/// - Die Size: 4.74 mm x 5.85mm = 27.73 mm
+	/// - The PowerPC Architecture uses instructions that are 4 bytes long and word-aligned.
 	/// </remarks>
 	/// <seealso cref="IProcessor" />
 	public class EspessoProcessor : IProcessor
