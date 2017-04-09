@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard1.4</TargetFramework>
+		<Authors>Christopher.Haws</Authors>
+		<Company>Spiral Games</Company>
+		<Product>Emu</Product>
+		<Description>Contains helpful types that don't exist in .NET Framework.</Description>
+		<Copyright>Spiral Games</Copyright>
+		<RepositoryUrl>https://github.com/ChristopherHaws/Emu.git</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<PackageTags>emu emulator types helpers utilities</PackageTags>
+		<PackageProjectUrl>https://github.com/ChristopherHaws/Emu</PackageProjectUrl>
+		<PackageLicenseUrl>https://github.com/ChristopherHaws/Emu/blob/master/LICENSE</PackageLicenseUrl>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<TreatSpecificWarningsAsErrors />
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<TreatSpecificWarningsAsErrors />
+	</PropertyGroup>
+
+</Project>

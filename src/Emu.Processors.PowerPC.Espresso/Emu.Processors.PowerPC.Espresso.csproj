@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Emu.Processors.Abstractions\Emu.Processors.Abstractions.csproj" />
+    <ProjectReference Include="..\Emu.Types\Emu.Types.csproj" />
   </ItemGroup>
 
 </Project>

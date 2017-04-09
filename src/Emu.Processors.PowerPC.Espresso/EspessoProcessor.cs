@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Emu.Types;
 
 namespace Emu.Processors.PowerPC.Espresso
 {

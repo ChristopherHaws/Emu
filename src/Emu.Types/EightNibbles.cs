@@ -1,9 +1,11 @@
 ﻿using System;
 
-namespace Emu.Processors
+namespace Emu.Types
 {
 	/// <summary>
 	/// Represents 8x 4-bit values.
+	/// 
+	/// Use this instead of <see cref="UInt32BitVector"/> when you need 8x 4-bit values, as it is optimized for that use case.
 	/// </summary>
 	public struct EightNibbles
 	{

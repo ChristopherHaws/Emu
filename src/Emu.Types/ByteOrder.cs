@@ -1,4 +1,4 @@
-﻿namespace System
+﻿namespace Emu.Types
 {
 	public enum ByteOrder
 	{

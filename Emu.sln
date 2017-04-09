@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emu.Processors.Abstractions
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Emu.Processors.PowerPC.Espresso", "src\Emu.Processors.PowerPC.Espresso\Emu.Processors.PowerPC.Espresso.csproj", "{3F80FDA8-AE01-424B-B3E1-BCFC495DA91E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emu.Types", "src\Emu.Types\Emu.Types.csproj", "{F9615ECB-BFF6-41B8-926D-71A002EC8722}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{3F80FDA8-AE01-424B-B3E1-BCFC495DA91E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F80FDA8-AE01-424B-B3E1-BCFC495DA91E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F80FDA8-AE01-424B-B3E1-BCFC495DA91E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9615ECB-BFF6-41B8-926D-71A002EC8722}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9615ECB-BFF6-41B8-926D-71A002EC8722}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9615ECB-BFF6-41B8-926D-71A002EC8722}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9615ECB-BFF6-41B8-926D-71A002EC8722}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,5 +44,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{18F80506-11D3-41DD-8A79-F4DF6C9D3932} = {AD9B3957-3C2B-479F-9C1F-D08018274D4F}
 		{3F80FDA8-AE01-424B-B3E1-BCFC495DA91E} = {AD9B3957-3C2B-479F-9C1F-D08018274D4F}
+		{F9615ECB-BFF6-41B8-926D-71A002EC8722} = {AD9B3957-3C2B-479F-9C1F-D08018274D4F}
 	EndGlobalSection
 EndGlobal

@@ -27,4 +27,8 @@
     <TreatSpecificWarningsAsErrors />
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Emu.Types\Emu.Types.csproj" />
+  </ItemGroup>
+
 </Project>

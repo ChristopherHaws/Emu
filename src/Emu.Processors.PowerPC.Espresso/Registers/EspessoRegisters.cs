@@ -1,4 +1,5 @@
 ﻿using System;
+using Emu.Types;
 
 namespace Emu.Processors.PowerPC.Espresso.Registers
 {
