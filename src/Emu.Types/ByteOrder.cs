@@ -2,6 +2,8 @@
 {
 	public enum ByteOrder
 	{
+		Unknown,
+
 		/// <summary>
 		/// Big endian (Motorola) byte order
 		/// </summary>
